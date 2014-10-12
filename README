@@ -1,0 +1,93 @@
+== About ==
+
+InPageComments is an extension of the MediaWiki.
+The visitors can comment on your wiki casually despite the permissions.
+
+
+For more information:
+  * https://github.com/uta/InPageComments
+
+
+
+== Requirement ==
+
+MediaWiki 1.23+ (likely to work on older versions also)
+
+
+
+== Download ==
+
+You can get the code directly from Git.
+
+$ git clone https://github.com/uta/InPageComments.git
+
+
+
+== Installation ==
+
+Once you have downloaded the code, place the ''InPageComments'' directory
+to extensions directory of your MediaWiki.
+
+Then add the following code to your LocalSettings.php:
+
+require_once( "$IP/extensions/InPageComments/InPageComments.php" );
+
+
+
+== Configuration ==
+
+You can configure behavior of the InPageComments at LocalSettings.php:
+
+  * $wgInPageCommentsTag
+  * $wgInPageCommentsFormMessage
+  * $wgInPageCommentsFormSubmit
+  * $wgInPageCommentsAnonDisplay
+  * $wgInPageCommentsMaxLetters
+  * $wgInPageCommentsDenyBlockedUser
+  * $wgInPageCommentsDenyProtectedPage
+  * $wgInPageCommentsSpamCheckEncoding
+  * $wgInPageCommentsSpamCheckReferer
+  * $wgInPageCommentsSpamCheckUrlCount
+
+=== $wgInPageCommentsTag ===
+
+You can assign a tag string of the InPageComments. A default value is 'comments'.
+So editors can put the comment form by adding '<comments />' on a wiki page.
+In most cases, you do not need to change this value.
+
+=== $wgInPageCommentsFormMessage ===
+
+You can assign a message which is displayed before the comment input box.
+
+=== $wgInPageCommentsFormSubmit ===
+
+You can assign a text of the submit button.
+
+=== $wgInPageCommentsAnonDisplay ===
+
+You can assign a text of a name of the anonymous user.
+
+=== $wgInPageCommentsMaxLetters ===
+
+You can assign a max letters of the comments.
+
+=== $wgInPageCommentsDenyBlockedUser ===
+
+You can assign whether the comments posted by blocked user will be denied.
+
+=== $wgInPageCommentsDenyProtectedPage ===
+
+You can assign whether the comments posted on protected page will be denied.
+
+=== $wgInPageCommentsSpamCheckEncoding ===
+
+You can assign whether a value of 'HTTP_ACCEPT_ENCODING' will be checked for spam assessment.
+
+=== $wgInPageCommentsSpamCheckReferer ===
+
+You can assign whether a value of 'HTTP_REFERER' will be checked for spam assessment.
+
+=== $wgInPageCommentsSpamCheckUrlCount ===
+
+You can assign the number of URLs that can be included in a comment. A default value is '2'.
+So the comment including 2 URLs are allowed. But including 3 URLs will be discarded.

@@ -1,0 +1,22 @@
+{
+  "@metadata": {
+    "authors": ["uta"]
+  },
+  "in-page-comments-anon-display":          "Anonymous",
+  "in-page-comments-desc":                  "Enables to comment in article page",
+  "in-page-comments-error-comment-empty":   "* Your comment is empty.",
+  "in-page-comments-error-comment-toolong": "* Your comment is too long. ($1 Max)",
+  "in-page-comments-error-page-empty":      "* Can't find the page to comment.",
+  "in-page-comments-error-page-protected":  "* The page is protected.",
+  "in-page-comments-error-tag-absence":     "* The page doesn't accept comment.",
+  "in-page-comments-error-unknown":         "* Failed to submit comment for some reason.",
+  "in-page-comments-error-user-blocked":    "* You are blocked now.",
+  "in-page-comments-failed-title":          "Failed to submit comment",
+  "in-page-comments-form-message":          "Comment : ",
+  "in-page-comments-form-submit":           "Submit",
+  "in-page-comments-format-comment":        "\n----\n* $1 -- $2 $3",
+  "in-page-comments-format-time":           "(jS F Y H:i)",
+  "in-page-comments-message-succeeded":     "Your comment was posted.",
+  "in-page-comments-update-summary":        "Comment via InPageComments",
+  "in-page-comments-z-dummy":               ""
+}

@@ -1,0 +1,22 @@
+{
+  "@metadata": {
+    "authors": ["uta"]
+  },
+  "in-page-comments-anon-display":          "匿名",
+  "in-page-comments-desc":                  "記事ページ内でのコメント投稿を可能にする",
+  "in-page-comments-error-comment-empty":   "* コメントが入力されていません。",
+  "in-page-comments-error-comment-toolong": "* コメントの最大文字数は $1 文字です。",
+  "in-page-comments-error-page-empty":      "* コメント送信元のページを取得できませんでした。",
+  "in-page-comments-error-page-protected":  "* コメント送信元のページは保護されています。",
+  "in-page-comments-error-tag-absence":     "* コメント送信元のページは現在コメントを受け付けておりません。",
+  "in-page-comments-error-unknown":         "* 何らかの原因でコメント送信に失敗しました。",
+  "in-page-comments-error-user-blocked":    "* ブロック中のためコメントを投稿できません。",
+  "in-page-comments-failed-title":          "コメント送信失敗",
+  "in-page-comments-form-message":          "コメント：",
+  "in-page-comments-form-submit":           "送信",
+  "in-page-comments-format-comment":        "\n----\n* $1 -- $2 $3",
+  "in-page-comments-format-time":           "(Y年n月j日 H:i)",
+  "in-page-comments-message-succeeded":     "コメントを投稿しました。",
+  "in-page-comments-update-summary":        "InPageComments経由のコメント",
+  "in-page-comments-z-dummy":               ""
+}
