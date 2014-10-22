@@ -44,10 +44,11 @@ class InPageCommentsUtil {
 
   public static function message() {
     $a = func_get_args();
-    if(call_user_func_array('wfMessage', $a)->isBlank()) {
+    $m = call_user_func_array('wfMessage', $a);
+    if($m->isBlank()) {
       return $a[0];
     } else {
-      return call_user_func_array('wfMessage', $a)->text();
+      return $m->text();
     }
   }
 

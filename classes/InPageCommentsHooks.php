@@ -4,11 +4,8 @@ class InPageCommentsHooks {
   public static function renderCommentForm($text, $params=array(), $parser=null, $frame=false) {
     global $wgInPageCommentsFormMessage, $wgInPageCommentsFormSubmit, $wgInPageCommentsMaxLetters;
     return Xml::openElement('form', array('action'=>SpecialPage::getTitleFor('InPageComments')->getLocalURL(), 'method'=>'post', 'id'=>'in_page_comments_form'))
-         . Html::hidden('t', $parser->mTitle->getDBKey())
-         . Xml::openElement('span')
-         . InPageCommentsUtil::message($wgInPageCommentsFormMessage)
-         . Xml::closeElement('span')
-         . Xml::input('c', 40, '', array('maxlength'=>$wgInPageCommentsMaxLetters))
+         . Xml::input('t', false, $parser->mTitle->getDBKey(), array('type'=>'hidden'))
+         . Xml::input('c', 40, false, array('type'=>'text', 'maxlength'=>$wgInPageCommentsMaxLetters, 'placeholder'=>InPageCommentsUtil::message($wgInPageCommentsFormMessage)))
          . Xml::submitButton(InPageCommentsUtil::message($wgInPageCommentsFormSubmit))
          . Xml::closeElement('form');
   }
