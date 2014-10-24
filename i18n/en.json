@@ -13,7 +13,6 @@
   "in-page-comments-error-user-blocked":    "* You are blocked now.",
   "in-page-comments-failed-title":          "Failed to submit comment",
   "in-page-comments-form-message":          "Please input your comment",
-  "in-page-comments-form-submit":           "Submit",
   "in-page-comments-format-comment":        "\n----\n* $1 - $2 $3",
   "in-page-comments-format-time":           "(jS F Y H:i)",
   "in-page-comments-message-succeeded":     "Your comment was posted.",

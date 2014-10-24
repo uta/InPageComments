@@ -19,6 +19,7 @@ $wgResourceModules['ext.InPageComments'] = array(
   'remoteExtPath'   => "$ext/resources/",
   'messages'        => array('in-page-comments-message-succeeded'),
   'scripts'         => array('ext.InPageComments.js'),
+  'styles'          => array('ext.InPageComments.less' => array('media' => 'all')),
 );
 
 $wgAutoloadClasses["${ext}Hooks"]   = "$dir/classes/${ext}Hooks.php";
@@ -31,9 +32,9 @@ $wgMessagesDirs[$ext]               = "$dir/i18n";
 $wgSpecialPages[$ext]               = "${ext}Special";
 
 $wgInPageCommentsTag                = 'comments';
-$wgInPageCommentsFormMessage        = 'in-page-comments-form-message';
-$wgInPageCommentsFormSubmit         = 'in-page-comments-form-submit';
 $wgInPageCommentsAnonDisplay        = 'in-page-comments-anon-display';
+$wgInPageCommentsFormMessage        = 'in-page-comments-form-message';
+$wgInPageCommentsUrlFontAwesome     = '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css';
 $wgInPageCommentsMaxLetters         = 200;
 $wgInPageCommentsDenyBlockedUser    = true;
 $wgInPageCommentsDenyProtectedPage  = true;

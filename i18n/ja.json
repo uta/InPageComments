@@ -13,7 +13,6 @@
   "in-page-comments-error-user-blocked":    "* ブロック中のためコメントを投稿できません。",
   "in-page-comments-failed-title":          "コメント送信失敗",
   "in-page-comments-form-message":          "コメントを入力してください",
-  "in-page-comments-form-submit":           "送信",
   "in-page-comments-format-comment":        "\n----\n* $1 - $2 $3",
   "in-page-comments-format-time":           "(Y年n月j日 H:i)",
   "in-page-comments-message-succeeded":     "コメントを投稿しました。",

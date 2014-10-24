@@ -39,9 +39,8 @@ require_once( "$IP/extensions/InPageComments/InPageComments.php" );
 You can configure behavior of the InPageComments at LocalSettings.php:
 
   * $wgInPageCommentsTag
-  * $wgInPageCommentsFormMessage
-  * $wgInPageCommentsFormSubmit
   * $wgInPageCommentsAnonDisplay
+  * $wgInPageCommentsFormMessage
   * $wgInPageCommentsMaxLetters
   * $wgInPageCommentsDenyBlockedUser
   * $wgInPageCommentsDenyProtectedPage
@@ -55,17 +54,20 @@ You can assign a tag string of the InPageComments. A default value is 'comments'
 So editors can put the comment form by adding '<comments />' on a wiki page.
 In most cases, you do not need to change this value.
 
+=== $wgInPageCommentsAnonDisplay ===
+
+You can assign a text of a name of the anonymous user.
+
 === $wgInPageCommentsFormMessage ===
 
 You can assign a message which is displayed before the comment input box.
 
-=== $wgInPageCommentsFormSubmit ===
+=== $wgInPageCommentsUrlFontAwesome ===
 
-You can assign a text of the submit button.
-
-=== $wgInPageCommentsAnonDisplay ===
-
-You can assign a text of a name of the anonymous user.
+You can assign an URL of the Font Awesome.
+A default value is the official static css file of it on CDN.
+If your wiki is within private network and can't access public CDN,
+then you should prepare it and assign the URL.
 
 === $wgInPageCommentsMaxLetters ===
 
