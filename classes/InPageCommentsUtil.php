@@ -35,13 +35,6 @@ class InPageCommentsUtil {
     }
   }
 
-  public static function formatComment($c) {
-    global $wgInPageCommentsAnonDisplay, $wgUser;
-    $u = ($wgUser->isAnon() ? self::message($wgInPageCommentsAnonDisplay) : '[[User:' . $wgUser->getName() .'|' . $wgUser->getName() . ']]');
-    $t = '<span class="time">' . self::time() . '</span>';
-    return self::message('in-page-comments-format-comment', $c, $u, $t);
-  }
-
   public static function message() {
     $a = func_get_args();
     $m = call_user_func_array('wfMessage', $a);

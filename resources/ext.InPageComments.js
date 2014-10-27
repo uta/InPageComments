@@ -24,11 +24,39 @@
         }
       });
     },
-    postExec: function() {
-      var e = $('#in_page_comments_box');
-      var q = e.val().trim();
-      e.val(q);
-      return (q.length != 0);
+    postExec: function(e) {
+      var api, p, v;
+      e.preventDefault();
+      e.stopPropagation();
+      e = $('#in_page_comments_box');
+      v = e.val().trim();
+      p = {action:'InPageComments', c:v, t:mw.config.get('wgRelevantPageName', mw.config.get('wgPageName'))};
+      if(v.length != 0) {
+        mw.InPageComments.$temp = v;
+        mw.InPageComments.state('posting');
+        (new mw.Api()).post(p)
+                      .done(function(){location.reload();})
+                      .fail(function(code, res) {
+                        mw.loader.load(['mediawiki.notification'], null, true);
+                        mw.notify($.parseHTML(res.message));
+                        mw.InPageComments.state('done');
+                      });
+      } else {
+        e.val(v);
+      }
+      return false;
+    },
+    state: function(state) {
+      switch(state) {
+        case 'done':
+          $('#in_page_comments_box').val(this.$temp).removeAttr('readonly').attr('placeholder', mw.message('in-page-comments-form-message').text());
+          $('#in_page_comments_btn span').removeClass('fa-spinner').removeClass('fa-spin').addClass('fa-comment-o');
+          break;
+        case 'posting':
+          $('#in_page_comments_box').val('').attr('readonly', 'readonly').attr('placeholder', mw.message('in-page-comments-message-posting').text());
+          $('#in_page_comments_btn span').removeClass('fa-comment-o').addClass('fa-spinner').addClass('fa-spin');
+          break;
+      }
     }
   };
   mw.InPageComments.init();
