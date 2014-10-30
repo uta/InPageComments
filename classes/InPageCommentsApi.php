@@ -27,6 +27,8 @@ class InPageCommentsApi extends ApiBase {
   }
 
   private function setErrors(&$ipc, $html=array()) {
+    InPageCommentsUtil::debug('begin');
+    $result = $this->getResult();
     array_push($html, '<ul>');
     foreach(array_unique($ipc->getErrors()) as $e) {
       if(is_array($e)) {
@@ -36,13 +38,14 @@ class InPageCommentsApi extends ApiBase {
       }
     }
     array_push($html, '</ul>');
-    $r = $this->getResult();
-    $r->addValue(null, 'error', true);
-    $r->addValue(null, 'message', join('', $html));
+    $message = join('', $html);
+    InPageCommentsUtil::debug('$message', $message);
+    $result->addValue(null, 'error', true);
+    $result->addValue(null, 'message', $message);
   }
 
   private function setCookie(&$ipc) {
-    InPageCommentsUtil::debug(__FUNCTION__, 'begin');
+    InPageCommentsUtil::debug('begin');
     $key = self::COOKIE_PREFIX . $ipc->getValue('a')->getLatest();
     $res = $this->getRequest()->response();
     $res->setcookie($key, '1', time() + self::COOKIE_DURATION, array('path'=>'/', 'httpOnly'=>false));

@@ -11,7 +11,7 @@ class InPageComments {
       $this->validate();
       $this->update();
     } catch(Exception $e) {
-      InPageCommentsUtil::debug(__FUNCTION__, 'exception', $e);
+      InPageCommentsUtil::debug('exception', $e);
       $this->errors = array('in-page-comments-error-unknown');
     }
   }
@@ -39,13 +39,12 @@ class InPageComments {
   private $block, $errors, $spam, $values;
 
   private function blockCheck() {
-    InPageCommentsUtil::debug(__FUNCTION__, 'begin');
+    InPageCommentsUtil::debug('begin');
     global $wgInPageCommentsDenyBlockedUser, $wgUser;
     if($wgInPageCommentsDenyBlockedUser && $wgUser->isBlocked()) {
       $this->block = true;
       $this->error('in-page-comments-error-user-blocked');
     }
-    InPageCommentsUtil::debug(__FUNCTION__, '$this->block', $this->block);
   }
 
   private function error($e) {
@@ -68,15 +67,13 @@ class InPageComments {
 
   private function parse($c, $t) {
     if($this->isBlocked()) return;
-    InPageCommentsUtil::debug(__FUNCTION__, 'begin');
+    InPageCommentsUtil::debug('begin');
     $this->parseComment($c);
-    InPageCommentsUtil::debug(__FUNCTION__, 'raw comment',    $this->values['r']);
-    InPageCommentsUtil::debug(__FUNCTION__, 'parsed comment', $this->values['c']);
     $this->parseTitleAndArticle($t);
-    InPageCommentsUtil::debug(__FUNCTION__, 'title',          $this->values['t']);
   }
 
   private function parseComment($c) {
+    InPageCommentsUtil::debug('begin');
     $this->values['r'] = $c;
     $c = InPageCommentsUtil::strTrim($c);
     if($c) {
@@ -86,9 +83,12 @@ class InPageComments {
     } else {
       $this->error('in-page-comments-error-comment-empty');
     }
+    InPageCommentsUtil::debug('raw comment',    $this->values['r']);
+    InPageCommentsUtil::debug('parsed comment', $this->values['c']);
   }
 
   private function parseTitleAndArticle($t) {
+    InPageCommentsUtil::debug('begin');
     $t = InPageCommentsUtil::strTrim($t);
     if($t) {
       $t = Title::newFromDBkey($t);
@@ -106,38 +106,41 @@ class InPageComments {
     } else {
       $this->error('in-page-comments-error-page-empty');
     }
+    InPageCommentsUtil::debug('title', $this->values['t']);
   }
 
   private function spamCheck() {
     if($this->isBlocked()) return;
-    InPageCommentsUtil::debug(__FUNCTION__, 'begin');
+    InPageCommentsUtil::debug('begin');
     global $wgInPageCommentsSpamCheckEncoding, $wgInPageCommentsSpamCheckReferer, $wgInPageCommentsSpamCheckUrlCount;
     if($wgInPageCommentsSpamCheckEncoding) {
-      InPageCommentsUtil::debug(__FUNCTION__, 'encoding', $_SERVER['HTTP_ACCEPT_ENCODING']);
+      InPageCommentsUtil::debug('encoding', $_SERVER['HTTP_ACCEPT_ENCODING']);
       if(strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') === false) {
         $this->spam = true;
       }
     }
     if($wgInPageCommentsSpamCheckReferer) {
-      InPageCommentsUtil::debug(__FUNCTION__, 'referer', $_SERVER['HTTP_REFERER']);
-      InPageCommentsUtil::debug(__FUNCTION__, 'server', $_SERVER['SERVER_NAME']);
+      InPageCommentsUtil::debug('referer', $_SERVER['HTTP_REFERER']);
+      InPageCommentsUtil::debug('server', $_SERVER['SERVER_NAME']);
       if(strpos($_SERVER['HTTP_REFERER'], $_SERVER['SERVER_NAME']) === false) {
         $this->spam = true;
       }
     }
     if($wgInPageCommentsSpamCheckUrlCount) {
       $i = preg_match_all('{https?://}', $this->values['r']);
-      InPageCommentsUtil::debug(__FUNCTION__, 'url-count', $i);
+      InPageCommentsUtil::debug('url-count', $i);
       if($i > $wgInPageCommentsSpamCheckUrlCount) {
         $this->spam = true;
       }
     }
-    InPageCommentsUtil::debug(__FUNCTION__, '$this->spam', $this->spam);
   }
 
   private function update() {
+    InPageCommentsUtil::debug('$this->block',  $this->block);
+    InPageCommentsUtil::debug('$this->errors', $this->errors);
+    InPageCommentsUtil::debug('$this->spam',   $this->spam);
     if($this->isBlocked() || $this->isErrored() || $this->isSpam()) return;
-    InPageCommentsUtil::debug(__FUNCTION__, 'begin');
+    InPageCommentsUtil::debug('begin');
     global $wgInPageCommentsTag;
     if(preg_match("/\A(.*<${wgInPageCommentsTag}[^>]*>)(.*)\z/s", $this->values['a']->getContent(), $m)) {
       $this->values['a']->doEdit(($m[1] . $this->formatComment($this->values['c']) . $m[2]), InPageCommentsUtil::message('in-page-comments-update-summary'));
@@ -148,14 +151,13 @@ class InPageComments {
 
   private function validate() {
     if($this->isBlocked() || $this->isSpam()) return;
-    InPageCommentsUtil::debug(__FUNCTION__, 'begin');
-    InPageCommentsUtil::debug(__FUNCTION__, '$this->errors', $this->errors);
+    InPageCommentsUtil::debug('begin');
     $this->validateComment();
     $this->validateTitle();
   }
 
   private function validateComment() {
-    InPageCommentsUtil::debug(__FUNCTION__, 'begin');
+    InPageCommentsUtil::debug('begin');
     global $wgInPageCommentsMaxLetters;
     if($this->values['c']) {
       if(mb_strlen($this->values['r']) > $wgInPageCommentsMaxLetters) {
@@ -164,15 +166,13 @@ class InPageComments {
     } else {
       $this->error('in-page-comments-error-comment-empty');
     }
-    InPageCommentsUtil::debug(__FUNCTION__, '$this->errors', $this->errors);
   }
 
   private function validateTitle() {
-    InPageCommentsUtil::debug(__FUNCTION__, 'begin');
+    InPageCommentsUtil::debug('begin');
     global $wgInPageCommentsDenyProtectedPage;
     if($wgInPageCommentsDenyProtectedPage && $this->values['t'] && $this->values['t']->isProtected('edit')) {
       $this->error('in-page-comments-error-page-protected');
     }
-    InPageCommentsUtil::debug(__FUNCTION__, '$this->errors', $this->errors);
   }
 }
