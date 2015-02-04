@@ -27,7 +27,6 @@ $wgAutoloadClasses[$ext]            = "$dir/classes/$ext.php";
 $wgAutoloadClasses["${ext}Api"]     = "$dir/classes/${ext}Api.php";
 $wgAutoloadClasses["${ext}Hooks"]   = "$dir/classes/${ext}Hooks.php";
 $wgAutoloadClasses["${ext}Util"]    = "$dir/classes/${ext}Util.php";
-$wgExtensionMessagesFiles[$ext]     = "$dir/i18n/_backward_compatibility.php";
 $wgHooks['BeforePageDisplay'][]     = "${ext}Hooks::renderResources";
 $wgHooks['ParserFirstCallInit'][]   = "${ext}Hooks::setParserHook";
 $wgMessagesDirs[$ext]               = "$dir/i18n";
